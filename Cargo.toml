@@ -7,3 +7,13 @@ edition = "2021"
 
 [dependencies]
 yew = { git = "https://github.com/yewstack/yew/" }
+gloo = "0.6"
+gloo-utils = "0.1"
+
+[dependencies.web-sys]
+version = "0.3"
+features = [
+    "HtmlInputElement",
+    "CssStyleDeclaration",
+    "HtmlElement"
+]

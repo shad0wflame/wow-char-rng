@@ -516,6 +516,9 @@ dependencies = [
 name = "wow-char-rng"
 version = "0.1.0"
 dependencies = [
+ "gloo",
+ "gloo-utils",
+ "web-sys",
  "yew",
 ]
 
