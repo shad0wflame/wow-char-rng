@@ -1,19 +1,30 @@
 mod state;
 mod components;
 
+use gloo::console::__macro::JsValue;
 use gloo_utils::body;
+use rand::{Rng, thread_rng};
 use web_sys::CssStyleDeclaration;
 use yew::prelude::*;
 use components::item::Item;
 
+fn set_rand_background(style: &CssStyleDeclaration) -> Result<(), JsValue> {
+    let mut rng = thread_rng();
+    let image_index: u8 = rng.gen_range(0..=4);
+
+    style.set_property("background-image", &format!("url(assets/images/backgrounds/{}.jpg)", image_index))?;
+    style.set_property("background-size", "cover")?;
+
+    Ok(())
+}
+
 #[function_component(App)]
 fn app() -> Html {
-    let body_style: CssStyleDeclaration  = body().style();
 
-    // TODO: Get the number randomly in a range between 0 and 4.
-    // TODO: Handle Result gracefully.
-    body_style.set_property("background-image", &format!("url(assets/images/backgrounds/{}.jpg)", 1));
-    body_style.set_property("background-size", "cover");
+    match set_rand_background(&body().style()) {
+        Err(e) => eprintln!("{:?}", e),
+        _ => ()
+    }
 
     html! {
         <div class="container h-100">
