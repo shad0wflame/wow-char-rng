@@ -9,9 +9,15 @@ pub struct ItemProps {
 }
 
 #[function_component(Item)]
-pub fn item(ItemProps { text, icon, class_name, on_click} : &ItemProps) -> Html {
-
-    let default_fn = Callback::from(|e: MouseEvent| { e.prevent_default() });
+pub fn item(
+    ItemProps {
+        text,
+        icon,
+        class_name,
+        on_click,
+    }: &ItemProps,
+) -> Html {
+    let default_fn = Callback::from(|e: MouseEvent| e.prevent_default());
 
     let callback = on_click.clone().unwrap_or_else(|| default_fn);
 
@@ -25,5 +31,3 @@ pub fn item(ItemProps { text, icon, class_name, on_click} : &ItemProps) -> Html 
         </div>
     }
 }
-
-
